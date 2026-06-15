@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "buycars-app"
+version = "0.1.0"
+description = "AI-powered car valuation, appraisal, and sales support platform"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["car", "valuation", "ai", "streamlit", "appraisal"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Business/Enterprise",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.dependencies]
+streamlit = "^1.28"
+pandas = "^2.0"
+numpy = "^1.24"
+scikit-learn = "^1.3"
+python-dotenv = "^1.0"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "black>=23.7",
+    "ruff>=0.0.292",
+    "mypy>=1.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/dniamir/buycars.com"
+Repository = "https://github.com/dniamir/buycars.com.git"
+Documentation = "https://github.com/dniamir/buycars.com/tree/main/docs"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=. --cov-report=html --cov-report=term-missing"
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | env
+  | __pycache__
+  | \.pytest_cache
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]  # Line too long (handled by black)
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
