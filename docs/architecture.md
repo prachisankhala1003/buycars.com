@@ -10,9 +10,20 @@
 
 buycars.com/
 │
-├── streamlit_app.py           # Streamlit dashboard (The BA business interface)
+├── streamlit_app.py           # Streamlit main entry point (home page)
 ├── README.md                  # Project documentation
 ├── pyproject.toml             # Project metadata, dependencies, and tool configuration
+├── requirements.txt           # Python package dependencies (auto-installed by devcontainer)
+│
+├── pages/                     # Streamlit multi-page app - auto-loaded as tabs
+│   ├── 1_consumer.py          # Consumer agent interface
+│   ├── 2_sales_team.py        # Sales agent interface  
+│   └── 3_executive.py         # Executive agent interface
+│
+├── utils/                     # Shared Python modules
+│   ├── __init__.py            # Package marker
+│   ├── predictor.py           # Car valuation model (placeholder: returns $9,999)
+│   └── agents.py              # AI agent classes (ConsumerAgent, SalesAgent, ExecutiveAgent)
 │
 ├── setup/                     # Virtual environment setup scripts
 │   ├── mac_setup_virtualenv.sh      # Mac: Setup Python env with pyenv

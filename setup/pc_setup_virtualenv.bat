@@ -19,9 +19,10 @@ python-%PYTHON_VERSION%-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
     echo Python %PYTHON_VERSION% is installed
 )
 
-:: Create the virtual environment in the parent directory
 echo Creating virtual environment in parent directory...
-cd ..
+:: Create the virtual environment in the repository root (script's parent)
+echo Creating virtual environment in repository root...
+pushd "%~dp0.."
 
 :: Create the virtual environment
 py -%PYTHON_VERSION:~0,4% -m venv env
@@ -39,11 +40,14 @@ SET var=%cd%
 ECHO %var% > env/Lib/site-packages/localpackages.pth
 echo Import paths configured successfully
 
-:: Install required packages
-echo Installing required packages from requirements.txt...
-pip install -r .\Commands\requirements.txt
+:: Install required packages (from this script's folder)
+echo Installing required packages from setup\requirements.txt...
+:: %~dp0 expands to the script directory (with trailing backslash)
+pip install -r "%~dp0requirements.txt"
 echo Required packages installed successfully
 
 echo Setup Complete
+:: Return to original directory
+popd
 pause
 cmd /k
